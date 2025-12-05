@@ -1,4 +1,4 @@
-import { Calendar, ArrowDown } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 import { motion } from 'motion/react';
 
 export function Timeline() {
@@ -108,44 +108,34 @@ export function Timeline() {
           aux défis contemporains.
         </p>
 
-        <div className="relative">
-          {/* Central Line */}
-          <div className="absolute left-1/2 transform -translate-x-1/2 top-0 bottom-0 w-1 bg-green-200 hidden md:block">
-            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full">
-              <ArrowDown className="text-green-300 w-8 h-8" />
-            </div>
-          </div>
-
-          {/* Mobile Line */}
-          <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-green-200 md:hidden" />
+        <div className="relative pl-8 sm:pl-32 py-8">
+          {/* Vertical Line */}
+          <div className="absolute left-8 sm:left-32 top-0 bottom-0 w-0.5 bg-green-200" />
 
           {/* Events */}
-          <div className="space-y-12 md:space-y-24">
+          <div className="space-y-12">
             {events.map((event, index) => (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-100px" }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`relative flex items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                  }`}
+                className="relative flex items-start"
               >
-                {/* Mobile Dot */}
-                <div className="absolute left-6 top-6 w-5 h-5 bg-green-600 rounded-full border-4 border-white md:hidden z-10" />
+                {/* Dot */}
+                <div className="absolute left-0 sm:left-0 w-5 h-5 bg-green-600 rounded-full border-4 border-white z-10 transform -translate-x-[9px]" />
 
-                {/* Desktop Center Dot */}
-                <div className="hidden md:block absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 w-5 h-5 bg-green-600 rounded-full border-4 border-white z-10" />
-
-                {/* Content Spacer for Desktop */}
-                <div className="hidden md:block w-1/2" />
+                {/* Date Label (Desktop only - left side) */}
+                <div className="hidden sm:block absolute left-[-140px] w-28 text-right">
+                  <span className="text-lg font-bold text-green-700">{event.year}</span>
+                </div>
 
                 {/* Content Card */}
-                <div className={`w-full md:w-1/2 pl-20 md:pl-0 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'
-                  }`}>
+                <div className="ml-8 w-full max-w-3xl">
                   <div className="bg-white border border-gray-200 rounded-lg p-6 hover:border-green-200 transition-all hover:shadow-md">
-                    <div className="flex items-start justify-between mb-3">
-                      <span className="px-3 py-1 bg-green-600 text-white text-xs rounded-full font-medium">
+                    <div className="flex items-center justify-between mb-3">
+                      <span className="sm:hidden px-3 py-1 bg-green-600 text-white text-xs rounded-full font-medium">
                         {event.year}
                       </span>
                       <span className={`px-3 py-1 text-xs rounded-full border ${getCategoryColor(event.category)}`}>

@@ -1,3 +1,4 @@
+import React from 'react';
 import { BookOpen, FileText, Video, Link as LinkIcon, Image as ImageIcon, Mic, ExternalLink } from 'lucide-react';
 
 export function Documentation() {
@@ -249,223 +250,211 @@ export function Documentation() {
     ]
   };
 
+  const Shelf = ({ children, title, icon: Icon }: { children: React.ReactNode, title: string, icon: any }) => (
+    <div className="mb-16">
+      <div className="flex items-center mb-6 border-b border-gray-200 pb-4">
+        <Icon className="mr-3 text-green-700" size={24} />
+        <h2 className="text-xl font-bold text-gray-900">{title}</h2>
+      </div>
+      <div className="px-4 py-8 bg-gray-50 rounded-lg border border-gray-100">
+        <div className="flex flex-wrap gap-x-8 gap-y-12 items-end">
+          {children}
+        </div>
+      </div>
+    </div>
+  );
+
+  const Book = ({ title, author, year, type, doi, url }: { title: string, author: string, year: string, type: string, doi?: string, url?: string }) => {
+    const link = doi ? `https://doi.org/${doi}` : (url?.startsWith('http') ? url : `https://${url}`);
+
+    // Minimalist color palette for spines
+    const spineColors = ['bg-green-700', 'bg-emerald-700', 'bg-teal-700', 'bg-cyan-700', 'bg-sky-700'];
+    const colorIndex = title.length % spineColors.length;
+    const spineColor = spineColors[colorIndex];
+
+    return (
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="group relative w-32 h-44 bg-white shadow-sm hover:shadow-md transition-all hover:-translate-y-1 duration-300 cursor-pointer border border-gray-200 rounded-r-sm"
+      >
+        {/* Minimalist Spine */}
+        <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${spineColor} rounded-l-sm`}></div>
+
+        {/* Content */}
+        <div className="pl-4 pr-3 py-4 h-full flex flex-col">
+          <div className="flex-1 overflow-hidden">
+            <h4 className="text-gray-900 text-[11px] font-bold leading-tight mb-2 line-clamp-4">
+              {title}
+            </h4>
+            <p className="text-gray-500 text-[10px] italic line-clamp-2">{author}</p>
+          </div>
+          <div className="mt-2 pt-2 border-t border-gray-100 flex justify-between items-end">
+            <span className="text-gray-400 text-[9px]">{year}</span>
+            <span className="text-[8px] px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded uppercase tracking-wider">{type.slice(0, 3)}</span>
+          </div>
+        </div>
+      </a>
+    );
+  };
+
+  const VideoTape = ({ title, duration, description }: { title: string, duration: string, description: string }) => (
+    <div className="group relative w-48 h-28 bg-gray-900 rounded shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer overflow-hidden">
+      {/* Tape Window Effect */}
+      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-12 bg-gray-800 rounded-sm flex items-center justify-center">
+        <div className="w-8 h-8 rounded-full border-2 border-gray-700 mx-2"></div>
+        <div className="w-8 h-8 rounded-full border-2 border-gray-700 mx-2"></div>
+      </div>
+
+      {/* Label */}
+      <div className="absolute top-0 left-0 right-0 bg-white/95 p-3 h-14 border-b border-gray-800">
+        <h4 className="text-gray-900 text-[10px] font-bold leading-tight line-clamp-2">{title}</h4>
+      </div>
+
+      {/* Duration Badge */}
+      <div className="absolute bottom-2 right-2 bg-red-600 text-white text-[9px] px-1.5 py-0.5 rounded">
+        {duration}
+      </div>
+
+      {/* Play Overlay on Hover */}
+      <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+        <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
+          <div className="w-0 h-0 border-t-[4px] border-t-transparent border-l-[8px] border-l-green-600 border-b-[4px] border-b-transparent ml-0.5"></div>
+        </div>
+      </div>
+    </div>
+  );
+
+  const Folder = ({ title, date, themes }: { title: string, date: string, themes: string[] }) => (
+    <div className="group relative w-40 h-52 bg-green-50 rounded-r-md rounded-bl-md shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer border border-green-100">
+      {/* Tab */}
+      <div className="absolute -top-2 left-0 w-16 h-3 bg-green-50 rounded-t border-t border-l border-r border-green-100"></div>
+
+      {/* Content */}
+      <div className="p-4 h-full flex flex-col">
+        <div className="border-b border-green-200/50 pb-2 mb-2">
+          <h4 className="text-green-900 text-[11px] font-bold leading-tight">{title}</h4>
+          <p className="text-green-700/60 text-[10px] mt-1">{date}</p>
+        </div>
+        <div className="flex-1">
+          <div className="mt-2 flex flex-wrap gap-1">
+            {themes.map((theme, i) => (
+              <span key={i} className="text-[8px] px-1.5 py-0.5 bg-white text-green-700 border border-green-100 rounded shadow-sm">
+                {theme}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="pt-16 min-h-screen bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="flex items-center mb-6">
-          <BookOpen className="mr-3" size={32} />
-          <h1 className="text-gray-900">Documentation</h1>
+          <BookOpen className="mr-3 text-green-700" size={32} />
+          <h1 className="text-gray-900 text-4xl font-bold">La Bibliothèque</h1>
         </div>
-        
-        <p className="text-gray-600 mb-16 max-w-3xl">
-          L'ensemble des sources, documents et matériaux ayant servi à construire notre analyse 
-          de la controverse. Cette documentation complète garantit la rigueur et la traçabilité 
-          de notre travail.
+
+        <p className="text-gray-600 mb-16 max-w-3xl text-lg">
+          Une collection organisée de savoirs, d'analyses et de témoignages pour approfondir la controverse.
         </p>
 
-        {/* Enregistrements vocaux */}
-        <section className="mb-16">
-          <div className="flex items-center mb-6">
-            <Mic className="mr-2 text-green-600" size={24} />
-            <h2 className="text-gray-900">Enregistrements vocaux des entretiens</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {documentation.enregistrements.map((item, index) => (
-              <div key={index} className="p-5 border border-green-200 bg-green-50 rounded-lg hover:border-green-300 transition-colors">
-                <div className="flex items-center justify-center w-12 h-12 bg-green-600 rounded-full mb-4">
-                  <Mic size={24} className="text-white" />
-                </div>
-                <h3 className="text-gray-900 mb-2">{item.titre}</h3>
-                <div className="text-sm text-gray-600 mb-3 space-y-1">
-                  <p>Date : {item.date}</p>
-                  <p>Durée : {item.duree}</p>
-                </div>
-                <p className="text-xs text-gray-600 mb-4">{item.description}</p>
-                <button className="w-full px-4 py-2 bg-green-600 text-white text-sm rounded hover:bg-green-700 transition-colors">
-                  Écouter l'enregistrement
-                </button>
-              </div>
-            ))}
-          </div>
-        </section>
+        {/* Bibliographie Section */}
+        <Shelf title="Bibliographie" icon={FileText}>
+          {documentation.bibliographieAnglais.map((item, index) => (
+            <Book
+              key={`en-${index}`}
+              title={item.titre}
+              author={item.auteur}
+              year={item.annee}
+              type={item.type}
+              doi={item.doi}
+            />
+          ))}
+          {documentation.bibliographieFrancais.map((item, index) => (
+            <Book
+              key={`fr-${index}`}
+              title={item.titre}
+              author={item.auteur}
+              year={item.annee}
+              type={item.type}
+              doi={item.doi}
+              url={item.url}
+            />
+          ))}
+        </Shelf>
 
-        {/* Bibliographie */}
-        <section className="mb-16">
-          <div className="flex items-center mb-6">
-            <FileText className="mr-2 text-green-600" size={24} />
-            <h2 className="text-gray-900">Bibliographie</h2>
-          </div>
-          
-          <div className="space-y-4">
-            {documentation.bibliographieAnglais.map((item, index) => (
-              <a 
-                key={index} 
-                href={`https://doi.org/${item.doi}`} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="block p-5 border border-gray-200 rounded-lg hover:border-green-200 hover:shadow-sm transition-all cursor-pointer"
-              >
-                <div className="flex items-start justify-between mb-2">
-                  <div className="flex-1">
-                    <h4 className="text-gray-900 mb-1 text-sm">{item.titre}</h4>
-                    <p className="text-sm text-gray-600">
-                      {item.auteur} ({item.annee})
-                    </p>
-                  </div>
-                  <span className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full whitespace-nowrap ml-3">
-                    {item.type}
-                  </span>
-                </div>
-                {item.doi && (
-                  <div className="inline-flex items-center text-xs text-green-600 hover:text-green-700 hover:underline">
-                    <ExternalLink size={12} className="mr-1" />
-                    DOI: {item.doi}
-                  </div>
-                )}
-              </a>
-            ))}
-            {documentation.bibliographieFrancais.map((item, index) => {
-              const link = item.doi ? `https://doi.org/${item.doi}` : (item.url?.startsWith('http') ? item.url : `https://${item.url}`);
-              return (
-                <a 
-                  key={index}
-                  href={link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block p-5 border border-gray-200 rounded-lg hover:border-green-200 hover:shadow-sm transition-all cursor-pointer"
-                >
-                  <div className="flex items-start justify-between mb-2">
-                    <div className="flex-1">
-                      <h4 className="text-gray-900 mb-1 text-sm">{item.titre}</h4>
-                      <p className="text-sm text-gray-600">
-                        {item.auteur} ({item.annee})
-                      </p>
-                    </div>
-                    <span className="px-3 py-1 bg-gray-100 text-gray-700 text-xs rounded-full whitespace-nowrap ml-3">
-                      {item.type}
-                    </span>
-                  </div>
-                  <div className="space-y-1">
-                    {item.doi && (
-                      <div className="inline-flex items-center text-xs text-green-600 hover:text-green-700 hover:underline">
-                        <ExternalLink size={12} className="mr-1" />
-                        DOI: {item.doi}
-                      </div>
-                    )}
-                    {item.url && !item.doi && (
-                      <div className="flex items-center text-xs text-green-600 hover:text-green-700 hover:underline">
-                        <ExternalLink size={12} className="mr-1" />
-                        <span className="truncate">URL: {item.url}</span>
-                      </div>
-                    )}
-                    {item.pages && (
-                      <p className="text-xs text-gray-500">Pages: {item.pages}</p>
-                    )}
-                  </div>
-                </a>
-              );
-            })}
-          </div>
-        </section>
+        {/* Vidéos Section */}
+        <Shelf title="Vidéothèque" icon={Video}>
+          {documentation.videos.map((item, index) => (
+            <VideoTape
+              key={index}
+              title={item.titre}
+              duration={item.duree}
+              description={item.description}
+            />
+          ))}
+        </Shelf>
 
-        {/* Webographie */}
-        <section className="mb-16">
+        {/* Entretiens Section */}
+        <Shelf title="Archives des Entretiens" icon={Mic}>
+          {documentation.entretiens.map((item, index) => (
+            <Folder
+              key={index}
+              title={item.titre}
+              date={item.date}
+              themes={item.themes}
+            />
+          ))}
+        </Shelf>
+
+        {/* Webographie (Classic List for now, or maybe a "Rolodex" style later? Keeping simple for now) */}
+        <section className="mb-16 mt-24">
           <div className="flex items-center mb-6">
-            <LinkIcon className="mr-2 text-green-600" size={24} />
-            <h2 className="text-gray-900">Webographie</h2>
+            <LinkIcon className="mr-2 text-green-700" size={24} />
+            <h2 className="text-gray-900 text-2xl font-bold">Webographie</h2>
           </div>
-          <div className="space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {documentation.webographie.map((item, index) => (
-              <a 
-                href={item.url.startsWith('http') ? item.url : `https://${item.url}`} 
-                target="_blank" 
+              <a
+                href={item.url.startsWith('http') ? item.url : `https://${item.url}`}
+                target="_blank"
                 rel="noopener noreferrer"
-                key={index} 
-                className="block p-5 border border-gray-200 rounded-lg hover:border-green-300 hover:shadow-sm transition-all group"
+                key={index}
+                className="block p-4 border border-gray-200 bg-white rounded hover:border-green-400 hover:shadow-md transition-all group"
               >
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <h3 className="text-gray-900 mb-1 group-hover:text-green-600 transition-colors">{item.titre}</h3>
-                    <p className="text-sm text-green-600 mb-2 flex items-center">
-                      <ExternalLink size={12} className="mr-1" />
-                      {item.url}
-                    </p>
-                    <p className="text-sm text-gray-600">{item.description}</p>
-                  </div>
-                </div>
+                <h3 className="text-gray-900 font-bold mb-1 group-hover:text-green-700">{item.titre}</h3>
+                <p className="text-sm text-green-600 mb-1 flex items-center">
+                  <ExternalLink size={12} className="mr-1" />
+                  {item.url}
+                </p>
+                <p className="text-sm text-gray-600">{item.description}</p>
               </a>
             ))}
           </div>
         </section>
 
-        {/* Comptes rendus d'entretiens */}
+        {/* Illustrations Section */}
         <section className="mb-16">
           <div className="flex items-center mb-6">
-            <FileText className="mr-2 text-green-600" size={24} />
-            <h2 className="text-gray-900">Comptes rendus d'entretiens</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {documentation.entretiens.map((item, index) => (
-              <div key={index} className="p-5 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors">
-                <h3 className="text-gray-900 mb-2">{item.titre}</h3>
-                <div className="text-sm text-gray-600 mb-3 space-y-1">
-                  <p>Date : {item.date}</p>
-                  <p>Durée : {item.duree}</p>
-                  <p>Lieu : {item.lieu}</p>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {item.themes.map((theme, i) => (
-                    <span key={i} className="text-xs px-2 py-1 bg-green-50 text-green-700 rounded">
-                      {theme}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Vidéos */}
-        <section className="mb-16">
-          <div className="flex items-center mb-6">
-            <Video className="mr-2 text-green-600" size={24} />
-            <h2 className="text-gray-900">Ressources vidéo</h2>
-          </div>
-          <div className="space-y-4">
-            {documentation.videos.map((item, index) => (
-              <div key={index} className="p-5 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors">
-                <div className="flex items-start justify-between">
-                  <div className="flex-1">
-                    <h3 className="text-gray-900 mb-1">{item.titre}</h3>
-                    <p className="text-sm text-gray-600">{item.description}</p>
-                  </div>
-                  <span className="px-3 py-1 bg-red-50 text-red-700 text-xs rounded-full whitespace-nowrap ml-4">
-                    {item.duree}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* Illustrations */}
-        <section>
-          <div className="flex items-center mb-6">
-            <ImageIcon className="mr-2 text-green-600" size={24} />
-            <h2 className="text-gray-900">Illustrations et données</h2>
+            <ImageIcon className="mr-2 text-green-700" size={24} />
+            <h2 className="text-gray-900 text-2xl font-bold">Galerie d'Illustrations</h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {documentation.illustrations.map((item, index) => (
-              <div key={index} className="p-5 border border-gray-200 rounded-lg hover:border-gray-300 transition-colors">
-                <div className="w-full h-32 bg-gray-100 rounded mb-3 flex items-center justify-center">
-                  <ImageIcon className="text-gray-400" size={32} />
+              <div key={index} className="p-4 bg-white border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 pb-6 rounded">
+                <div className="w-full h-40 bg-gray-50 mb-3 flex items-center justify-center overflow-hidden rounded-sm">
+                  <ImageIcon className="text-gray-300" size={48} />
                 </div>
-                <h3 className="text-gray-900 mb-1 text-sm">{item.titre}</h3>
-                <p className="text-xs text-gray-600">{item.description}</p>
+                <h3 className="text-gray-900 font-medium text-center text-sm">{item.titre}</h3>
               </div>
             ))}
           </div>
         </section>
+
       </div>
     </div>
   );
