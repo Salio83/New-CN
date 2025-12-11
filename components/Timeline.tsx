@@ -4,64 +4,52 @@ import { motion } from 'motion/react';
 export function Timeline() {
   const events = [
     {
-      year: "1950-1960",
-      title: "Prémices de la télémédecine",
-      description: "Premières expérimentations de transmission d'images médicales par téléphone.",
+      year: "Années 1960",
+      title: "Les premières expérimentations modernes de la télémédecine",
+      description: "Premiers projets aux États-Unis, notamment pour des liaisons entre hôpitaux universitaires et centres isolés dans un contexte de recherche.",
       category: "innovation"
     },
     {
-      year: "1970",
-      title: "NASA et télémédecine spatiale",
-      description: "Développement de systèmes de surveillance médicale à distance pour les astronautes.",
-      category: "innovation"
-    },
-    {
-      year: "1990-2000",
-      title: "Démocratisation d'Internet",
-      description: "Émergence des premières plateformes de consultation en ligne et des dossiers médicaux électroniques.",
-      category: "innovation"
-    },
-    {
-      year: "2009",
-      title: "Légalisation en France",
-      description: "La loi HPST reconnaît officiellement la télémédecine et en définit le cadre juridique.",
+      year: "2004",
+      title: "Officialisation de l’e-health",
+      description: "L’Organisation Mondiale de la Santé (OMS) adopte officiellement le terme \"eHealth\". Jalon conceptuel marquant l'application des TIC au domaine de la santé à l'échelle mondiale.",
       category: "legislation"
     },
     {
+      year: "2010",
+      title: "Décret Français sur la Télémédecine (19 octobre)",
+      description: "Jalon réglementaire majeur qui définit les cinq actes de télémédecine : téléconsultation, téléexpertise, télésurveillance, téléassistance et régulation médicale.",
+      category: "legislation"
+    },
+    {
+      year: "2013-2015",
+      title: "Émergence des Nouveaux Usages en Santé Publique",
+      description: "Période de réflexion sur l'intégration des technologies individuelles et mobiles dans les parcours de soins, marquant le début de la reconnaissance du potentiel de la santé mobile (m-santé).",
+      category: "innovation"
+    },
+    {
+      year: "2017",
+      title: "Année de la Réflexion Éthique et de l'Empowerment",
+      description: "Nombreuses publications s'interrogeant sur l'impact des objets connectés sur la santé, l'autonomisation du patient connecté (empowerment), et les enjeux éthiques et humanistes face aux avancées technologiques.",
+      category: "controverse"
+    },
+    {
       year: "2018",
-      title: "Remboursement par l'Assurance Maladie",
-      description: "La téléconsultation devient remboursable en France, marquant un tournant majeur.",
+      title: "Remboursement par l'Assurance Maladie (15 septembre)",
+      description: "Entrée en vigueur de la prise en charge des actes de télémédecine (téléconsultation et téléexpertise). Point de bascule pour le déploiement de masse de la télémédecine en France, la rendant accessible et remboursable.",
       category: "legislation"
     },
     {
       year: "2020",
-      title: "Pandémie COVID-19",
-      description: "Explosion de l'usage de la télémédecine : +1000% de téléconsultations. Assouplissement des règles.",
+      title: "Crise sanitaire liée à la COVID-19",
+      description: "Accélération des usages numériques en santé. La téléconsultation est temporairement libéralisée, conduisant à une adoption massive et un changement d'échelle des pratiques.",
       category: "crise"
     },
     {
-      year: "2021",
-      title: "Débats sur la pérennisation",
-      description: "Questionnements sur le maintien des mesures dérogatoires et les risques de surutilisation.",
-      category: "controverse"
-    },
-    {
-      year: "2022",
-      title: "Encadrement renforcé",
-      description: "Nouvelles régulations pour prévenir les abus et garantir la qualité des soins.",
-      category: "legislation"
-    },
-    {
-      year: "2023-2024",
-      title: "Intégration de l'IA",
-      description: "Émergence de l'intelligence artificielle dans le diagnostic et le suivi des patients. Nouveaux débats éthiques.",
+      year: "2024-2025",
+      title: "Intensification des recherches sur l'IA en e-santé",
+      description: "Les travaux se concentrent sur l'intégration de l'Intelligence Artificielle (thérapeutiques numériques pilotées par IA), l'extension de la e-santé à des milieux spécifiques (comme le milieu carcéral), et la recherche de stratégies d'adoption durable des outils numériques en santé mentale.",
       category: "innovation"
-    },
-    {
-      year: "2025",
-      title: "État des lieux actuel",
-      description: "Stabilisation de l'usage, mais persistance des controverses sur l'équité d'accès et la qualité des soins.",
-      category: "controverse"
     }
   ];
 

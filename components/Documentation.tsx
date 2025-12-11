@@ -25,7 +25,7 @@ export function Documentation() {
     ],
     bibliographieAnglais: [
       {
-        titre: "Impact of E-Health Literacy on Diabetes Self-Care Activities Among People With Type 2 Diabetes Attending Primary Healthcare Centers in Makkah City, Saudi Arabia: A Cross-Sectional Study, 2025",
+        titre: "Impact of E-Health Literacy on Diabetes Self-Care Activities Among People With Type 2 Diabetes Attending Primary Healthcare Centers in Makkah City, Saudi Arabia",
         auteur: "AlShehri, Waleed S., et Yasser Y. Khojah",
         annee: "2025",
         type: "Article",
@@ -33,27 +33,27 @@ export function Documentation() {
       },
       {
         titre: "Digital health technologies in swallowing care from screening to rehabilitation: A narrative review",
-        auteur: "Alter, Isaac L., Carla Dias, Jack Briano, et Anaïs Rameau",
+        auteur: "Alter, Isaac L., Carla Dias, et al.",
         annee: "2025",
         type: "Article",
         doi: "10.1016/j.anl.2025.05.002"
       },
       {
         titre: "Intention to Use Telemedicine Services during a Health Crisis: A Motivation-Opportunity-Ability Theory Approach",
-        auteur: "Atmaja, Ferry Tema, Cedric Hsi-Jui Wu, Revanth Kumar Guttena, et Andreawan Honora",
+        auteur: "Atmaja, Ferry Tema, et al.",
         annee: "2024",
         type: "Article",
         doi: "10.1111/ijcs.13044"
       },
       {
         titre: "Navigating the future of health care with AI-driven digital therapeutics",
-        auteur: "Vasdev, Nupur, Tanisha Gupta, Bhakti Pawar, Anoothi Bain, et Rakesh Kumar Tekade",
+        auteur: "Vasdev, Nupur, et al.",
         annee: "2024",
         type: "Article",
         doi: "10.1016/j.drudis.2024.104110"
       },
       {
-        titre: "Investigating the Current State of the Adoption of E-Health Tools for Digital Mental Health Services in a Selected South African Higher Education Institution",
+        titre: "Investigating the Current State of the Adoption of E-Health Tools for Digital Mental Health Services",
         auteur: "Rhodrick, Nyasha Musakuro",
         annee: "2025",
         type: "Article",
@@ -61,13 +61,13 @@ export function Documentation() {
       },
       {
         titre: "Innovations in E-Health",
-        auteur: "Wicks, Paul, Jon Stamford, Martha A. Grootenhuis, Lotte Haverman, et Sara Ahmed",
+        auteur: "Wicks, Paul, et al.",
         annee: "2014",
         type: "Article",
         doi: "10.1007/s11136-013-0458-x"
       },
       {
-        titre: "Strategies for sustainable adoption of e-health tools for digital mental health services",
+        titre: "Strategies for sustainable adoption of e-health tools",
         auteur: "Musakuro, Rhodrick N., et Liiza Gie",
         annee: "2025",
         type: "Article",
@@ -75,14 +75,14 @@ export function Documentation() {
       },
       {
         titre: "The Increasing Value of eHealth in the Delivery of Patient-Centred Cancer Care",
-        auteur: "Penedo, Frank J, Laura B Oswald, Joshua P Kronenfeld, Sofia F Garcia, David Cella, et Betina Yanez",
+        auteur: "Penedo, Frank J, et al.",
         annee: "2020",
         type: "Article",
         doi: "10.1016/S1470-2045(20)30021-8"
       },
       {
-        titre: "Electronic health records and e-prescribing in Australia: An exploration of technological utilisation in Australian community pharmacies",
-        auteur: "Hareem, Amina, Ieva Stupans, Joon Soo Park, Julie E. Stevens, et Kate Wang",
+        titre: "Electronic health records and e-prescribing in Australia",
+        auteur: "Hareem, Amina, et al.",
         annee: "2024",
         type: "Article",
         doi: "10.1016/j.ijmedinf.2024.105472"
@@ -97,31 +97,31 @@ export function Documentation() {
         url: "https://documentation.ehesp.fr/memoires/2017/mip/groupe%2024.pdf"
       },
       {
-        titre: "Optimisation d'une interface numérique de santé à distance pour une meilleure expérience-patient",
+        titre: "Optimisation d’une interface numérique de santé à distance",
         auteur: "Lourdais, Chloé",
         annee: "2022",
-        type: "Thèse de doctorat",
+        type: "Thèse",
         url: "https://theses.hal.science/tel-04128753"
       },
       {
         titre: "E-santé et milieu carcéral",
         auteur: "Py, Ulysse",
         annee: "2024",
-        type: "Thèse de doctorat",
+        type: "Thèse",
         url: "https://theses.fr/2024LORR0275"
       },
       {
-        titre: "La e-santé : de nouveaux usages pour les technologies individuelles en santé publique",
-        auteur: "Salmon, Fréderic Durand, et Loïc Le Tallec",
+        titre: "La e-santé : de nouveaux usages pour les technologies individuelles",
+        auteur: "Salmon, F.D, et Loïc Le Tallec",
         annee: "2014",
         type: "Article",
         doi: "10.3917/rindu.144.0070"
       },
       {
-        titre: "Appropriation de la plateforme de télépathologie I-PATH-INCTR dans la prise en charge des cancers pédiatriques au Mali et en RDC",
+        titre: "Appropriation de la plateforme de télépathologie I-PATH-INCTR",
         auteur: "Sossou, Komlanvi Etienne",
         annee: "2023",
-        type: "Thèse de doctorat",
+        type: "Thèse",
         url: "https://theses.hal.science/tel-04876097"
       },
       {
@@ -132,29 +132,29 @@ export function Documentation() {
         doi: "10.3917/gall.valla.2015.01"
       },
       {
-        titre: "e-Médecine, e-santé et informatique - entre espoirs technologiques et désillusion humaniste",
+        titre: "e-Médecine, e-santé et informatique - entre espoirs et désillusion",
         auteur: "Béorchia, Sylvain",
         annee: "2017",
         type: "Article",
         doi: "10.4267/2042/63780"
       },
       {
-        titre: "L'e-santé : l'empowerment du patient connecté",
+        titre: "L’e-santé : l’empowerment du patient connecté",
         auteur: "Cases, Anne-Sophie",
         annee: "2017",
         type: "Article",
         doi: "10.3917/jgem.174.0137"
       },
       {
-        titre: "Les nouvelles technologies : l'avenir de notre santé ?",
+        titre: "Les nouvelles technologies : l’avenir de notre santé ?",
         auteur: "Chambaud, Laurent",
         annee: "2023",
         type: "Chapitre d'ouvrage",
         pages: "77-89"
       },
       {
-        titre: "Pratique de la e-santé en néphrologie en France : Résultats de la première enquête sur la télénéphrologie",
-        auteur: "Citarda, Salvatore, Anne-Laure Camarroque, Guillaume Seret, et al.",
+        titre: "Pratique de la e-santé en néphrologie en France",
+        auteur: "Citarda, Salvatore, et al.",
         annee: "2019",
         type: "Article",
         doi: "10.1016/j.nephro.2019.06.001"
@@ -299,7 +299,7 @@ export function Documentation() {
     );
   };
 
-  const VideoTape = ({ title, duration, description }: { title: string, duration: string, description: string }) => (
+  const VideoTape = ({ title, duration }: { title: string, duration: string, description: string }) => (
     <div className="group relative w-48 h-28 bg-gray-900 rounded shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer overflow-hidden">
       {/* Tape Window Effect */}
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-12 bg-gray-800 rounded-sm flex items-center justify-center">
