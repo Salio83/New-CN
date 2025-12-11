@@ -10,7 +10,7 @@ export function Footer({ setActiveSection }: FooterProps) {
           <div>
             <h3 className="text-gray-900 mb-4">À propos</h3>
             <p className="text-sm text-gray-600 leading-relaxed">
-              Projet universitaire d'analyse de la controverse sur la télémédecine et l'e-santé réalisé à Polytech Montpellier.
+              Projet universitaire Test d'analyse de la controverse sur la télémédecine et l'e-santé réalisé à Polytech Montpellier.
             </p>
           </div>
           
