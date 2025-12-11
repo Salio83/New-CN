@@ -9,7 +9,7 @@ export function Team() {
       email: "isabelle.bourdon@umontpellier.fr"
     },
     {
-      nom: "Kaouthar ElFenni",
+      nom: "Kaoutar ElFenni",
       role: "Cheffe de projet",
       responsabilites: ["Coordination générale", "Gestion d'équipe", "Organisation du travail"],
       email: "kaouthar.elfenni@et.umontpellier.fr"
@@ -50,7 +50,7 @@ export function Team() {
         
         <p className="text-gray-600 mb-16 max-w-3xl">
           Ce projet a été réalisé dans le cadre du cours d'introduction au système d'information 
-          du département IG à Polytech Montpellier. Notre équipe a travaillé pour explorer 
+          du département DAMS à Polytech Montpellier. Notre équipe a travaillé pour explorer 
           cette controverse sous tous ses angles.
         </p>
 

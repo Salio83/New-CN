@@ -1,460 +1,184 @@
-import React from 'react';
-import { BookOpen, FileText, Video, Link as LinkIcon, Image as ImageIcon, Mic, ExternalLink } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { BookOpen, FileText, Video, Link as LinkIcon, Image as ImageIcon, Mic, ExternalLink, ArrowRight, ArrowLeft, Brain, Network, Heart } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
 
-export function Documentation() {
-  const documentation = {
-    enregistrements: [
-      {
-        titre: "Entretien avec Mira Ballout",
-        date: "15 octobre 2024",
-        duree: "1h15",
-        description: "Discussion sur la pratique de la télémédecine et l'accessibilité aux soins"
-      },
-      {
-        titre: "Entretien avec Anne-Sophie Cases",
-        date: "8 novembre 2024",
-        duree: "1h30",
-        description: "Analyse de l'empowerment du patient connecté et enjeux de la e-santé"
-      },
-      {
-        titre: "Entretien avec Dr Gregoire Mercier",
-        date: "12 novembre 2024",
-        duree: "1h20",
-        description: "Perspectives médicales et économiques de la télémédecine"
-      }
-    ],
-    bibliographieAnglais: [
-      {
-        titre: "Impact of E-Health Literacy on Diabetes Self-Care Activities Among People With Type 2 Diabetes Attending Primary Healthcare Centers in Makkah City, Saudi Arabia: A Cross-Sectional Study, 2025",
-        auteur: "AlShehri, Waleed S., et Yasser Y. Khojah",
-        annee: "2025",
-        type: "Article",
-        doi: "10.7759/cureus.87968"
-      },
-      {
-        titre: "Digital health technologies in swallowing care from screening to rehabilitation: A narrative review",
-        auteur: "Alter, Isaac L., Carla Dias, Jack Briano, et Anaïs Rameau",
-        annee: "2025",
-        type: "Article",
-        doi: "10.1016/j.anl.2025.05.002"
-      },
-      {
-        titre: "Intention to Use Telemedicine Services during a Health Crisis: A Motivation-Opportunity-Ability Theory Approach",
-        auteur: "Atmaja, Ferry Tema, Cedric Hsi-Jui Wu, Revanth Kumar Guttena, et Andreawan Honora",
-        annee: "2024",
-        type: "Article",
-        doi: "10.1111/ijcs.13044"
-      },
-      {
-        titre: "Navigating the future of health care with AI-driven digital therapeutics",
-        auteur: "Vasdev, Nupur, Tanisha Gupta, Bhakti Pawar, Anoothi Bain, et Rakesh Kumar Tekade",
-        annee: "2024",
-        type: "Article",
-        doi: "10.1016/j.drudis.2024.104110"
-      },
-      {
-        titre: "Investigating the Current State of the Adoption of E-Health Tools for Digital Mental Health Services in a Selected South African Higher Education Institution",
-        auteur: "Rhodrick, Nyasha Musakuro",
-        annee: "2025",
-        type: "Article",
-        doi: "10.36096/ijbes.v7i2.698"
-      },
-      {
-        titre: "Innovations in E-Health",
-        auteur: "Wicks, Paul, Jon Stamford, Martha A. Grootenhuis, Lotte Haverman, et Sara Ahmed",
-        annee: "2014",
-        type: "Article",
-        doi: "10.1007/s11136-013-0458-x"
-      },
-      {
-        titre: "Strategies for sustainable adoption of e-health tools for digital mental health services",
-        auteur: "Musakuro, Rhodrick N., et Liiza Gie",
-        annee: "2025",
-        type: "Article",
-        doi: "10.4102/sajhrm.v23i0.3053"
-      },
-      {
-        titre: "The Increasing Value of eHealth in the Delivery of Patient-Centred Cancer Care",
-        auteur: "Penedo, Frank J, Laura B Oswald, Joshua P Kronenfeld, Sofia F Garcia, David Cella, et Betina Yanez",
-        annee: "2020",
-        type: "Article",
-        doi: "10.1016/S1470-2045(20)30021-8"
-      },
-      {
-        titre: "Electronic health records and e-prescribing in Australia: An exploration of technological utilisation in Australian community pharmacies",
-        auteur: "Hareem, Amina, Ieva Stupans, Joon Soo Park, Julie E. Stevens, et Kate Wang",
-        annee: "2024",
-        type: "Article",
-        doi: "10.1016/j.ijmedinf.2024.105472"
-      }
-    ],
-    bibliographieFrancais: [
-      {
-        titre: "LA SANTÉ CONNECTÉE",
-        auteur: "GLOANNEC & al.",
-        annee: "2017",
-        type: "Module MIP - EHESP",
-        url: "https://documentation.ehesp.fr/memoires/2017/mip/groupe%2024.pdf"
-      },
-      {
-        titre: "Optimisation d'une interface numérique de santé à distance pour une meilleure expérience-patient",
-        auteur: "Lourdais, Chloé",
-        annee: "2022",
-        type: "Thèse de doctorat",
-        url: "https://theses.hal.science/tel-04128753"
-      },
-      {
-        titre: "E-santé et milieu carcéral",
-        auteur: "Py, Ulysse",
-        annee: "2024",
-        type: "Thèse de doctorat",
-        url: "https://theses.fr/2024LORR0275"
-      },
-      {
-        titre: "La e-santé : de nouveaux usages pour les technologies individuelles en santé publique",
-        auteur: "Salmon, Fréderic Durand, et Loïc Le Tallec",
-        annee: "2014",
-        type: "Article",
-        doi: "10.3917/rindu.144.0070"
-      },
-      {
-        titre: "Appropriation de la plateforme de télépathologie I-PATH-INCTR dans la prise en charge des cancers pédiatriques au Mali et en RDC",
-        auteur: "Sossou, Komlanvi Etienne",
-        annee: "2023",
-        type: "Thèse de doctorat",
-        url: "https://theses.hal.science/tel-04876097"
-      },
-      {
-        titre: "La médecine sans médecin ? Le numérique au service du malade",
-        auteur: "Vallancien, Guy",
-        annee: "2015",
-        type: "Ouvrage",
-        doi: "10.3917/gall.valla.2015.01"
-      },
-      {
-        titre: "e-Médecine, e-santé et informatique - entre espoirs technologiques et désillusion humaniste",
-        auteur: "Béorchia, Sylvain",
-        annee: "2017",
-        type: "Article",
-        doi: "10.4267/2042/63780"
-      },
-      {
-        titre: "L'e-santé : l'empowerment du patient connecté",
-        auteur: "Cases, Anne-Sophie",
-        annee: "2017",
-        type: "Article",
-        doi: "10.3917/jgem.174.0137"
-      },
-      {
-        titre: "Les nouvelles technologies : l'avenir de notre santé ?",
-        auteur: "Chambaud, Laurent",
-        annee: "2023",
-        type: "Chapitre d'ouvrage",
-        pages: "77-89"
-      },
-      {
-        titre: "Pratique de la e-santé en néphrologie en France : Résultats de la première enquête sur la télénéphrologie",
-        auteur: "Citarda, Salvatore, Anne-Laure Camarroque, Guillaume Seret, et al.",
-        annee: "2019",
-        type: "Article",
-        doi: "10.1016/j.nephro.2019.06.001"
-      },
-      {
-        titre: "Objets connectés et santé",
-        auteur: "Debet, Anne",
-        annee: "2017",
-        type: "Article",
-        doi: "10.3917/jdsam.hs2.0034"
-      }
-    ],
-    webographie: [
-      {
-        titre: "Site officiel de l'Assurance Maladie - Téléconsultation",
-        url: "ameli.fr/telemedicine",
-        description: "Informations officielles sur la téléconsultation et son remboursement"
-      },
-      {
-        titre: "Ordre National des Médecins - Télémédecine",
-        url: "conseil-national.medecin.fr",
-        description: "Cadre déontologique et bonnes pratiques"
-      },
-      {
-        titre: "CNIL - Protection des données de santé",
-        url: "cnil.fr/sante",
-        description: "Recommandations sur la protection des données"
-      },
-      {
-        titre: "Agence du Numérique en Santé (ANS)",
-        url: "esante.gouv.fr",
-        description: "Stratégie nationale et référentiels techniques"
-      },
-      {
-        titre: "Fédération Hospitalière de France",
-        url: "fhf.fr",
-        description: "Position des hôpitaux sur la télémédecine"
-      }
-    ],
-    entretiens: [
-      {
-        titre: "Entretien avec Mira Ballout",
-        date: "15 octobre 2024",
-        duree: "1h15",
-        lieu: "Visioconférence",
-        themes: ["Pratique de la télémédecine", "Accessibilité", "Défis techniques"]
-      },
-      {
-        titre: "Entretien avec Anne-Sophie Cases",
-        date: "8 novembre 2024",
-        duree: "1h30",
-        lieu: "Visioconférence",
-        themes: ["E-santé", "Empowerment patient", "Innovation numérique"]
-      },
-      {
-        titre: "Entretien avec Dr Gregoire Mercier",
-        date: "12 novembre 2024",
-        duree: "1h20",
-        lieu: "CHU Montpellier",
-        themes: ["Économie de la santé", "Télémédecine", "Modèles de financement"]
-      }
-    ],
-    videos: [
-      {
-        titre: "La télémédecine en pratique - Reportage France 3",
-        duree: "12:30",
-        description: "Reportage dans une maison de santé utilisant la télémédecine"
-      },
-      {
-        titre: "Débat : Télémédecine, progrès ou régression ?",
-        duree: "45:00",
-        description: "Table ronde avec différents acteurs du système de santé"
-      },
-      {
-        titre: "Conférence HAS - État des lieux 2023",
-        duree: "1:20:00",
-        description: "Présentation des données et recommandations officielles"
-      }
-    ],
-    illustrations: [
-      {
-        titre: "Infographie : Évolution du nombre de téléconsultations",
-        description: "Graphique montrant l'explosion des consultations pendant la COVID-19"
-      },
-      {
-        titre: "Carte des déserts médicaux en France",
-        description: "Visualisation des zones sous-dotées en médecins"
-      },
-      {
-        titre: "Schéma : Parcours type d'une téléconsultation",
-        description: "Diagramme explicatif du processus technique et médical"
-      }
-    ]
-  };
+interface DocumentationProps {
+  setActiveSection: (section: string) => void;
+}
 
-  const Shelf = ({ children, title, icon: Icon }: { children: React.ReactNode, title: string, icon: any }) => (
-    <div className="mb-16">
-      <div className="flex items-center mb-6 border-b border-gray-200 pb-4">
-        <Icon className="mr-3 text-green-700" size={24} />
-        <h2 className="text-xl font-bold text-gray-900">{title}</h2>
-      </div>
-      <div className="px-4 py-8 bg-gray-50 rounded-lg border border-gray-100">
-        <div className="flex flex-wrap gap-x-8 gap-y-12 items-end">
-          {children}
-        </div>
-      </div>
-    </div>
-  );
+export function Documentation({ setActiveSection }: DocumentationProps) {
+  const [currentSlide] = useState(0); // page is single presentation view
 
-  const Book = ({ title, author, year, type, doi, url }: { title: string, author: string, year: string, type: string, doi?: string, url?: string }) => {
-    const link = doi ? `https://doi.org/${doi}` : (url?.startsWith('http') ? url : `https://${url}`);
+  const bibliographie = [
+    { title: "Impact of E-Health Literacy on Diabetes Self-Care Activities Among People With Type 2 Diabetes Attending Primary Healthcare Centers in Makkah City, Saudi Arabia: A Cross-Sectional Study", authors: "AlShehri, Waleed S.; Khojah, Yasser Y.", year: 2025, type: "Article" },
+    { title: "Digital health technologies in swallowing care from screening to rehabilitation: A narrative review", authors: "Alter, Isaac L.; Dias, Carla; Briano, Jack; Rameau, Anaïs", year: 2025, type: "Article" },
+    { title: "Intention to Use Telemedicine Services during a Health Crisis: A Motivation-Opportunity-Ability Theory Approach", authors: "Atmaja, Ferry Tema; Wu, Cedric Hsi-Jui; Guttena, Revanth Kumar; Honora, Andreawan", year: 2024, type: "Article" },
+    { title: "Navigating the future of health care with AI-driven digital therapeutics", authors: "Vasdev, Nupur; Gupta, Tanisha; Pawar, Bhakti; Bain, Anoothi; Tekade, Rakesh Kumar", year: 2024, type: "Article" },
+    { title: "Investigating the Current State of the Adoption of E-Health Tools for Digital Mental Health Services in a Selected South African Higher Education Institution", authors: "Rhodrick, Nyasha Musakuro", year: 2025, type: "Article" },
+    { title: "Innovations in E-Health", authors: "Wicks, Paul; Stamford, Jon; Grootenhuis, Martha A.; Haverman, Lotte; Ahmed, Sara", year: 2014, type: "Article" },
+    { title: "Strategies for sustainable adoption of e-health tools for digital mental health services", authors: "Musakuro, Rhodrick N.; Gie, Liiza", year: 2025, type: "Article" },
+    { title: "The Increasing Value of eHealth in the Delivery of Patient-Centred Cancer Care", authors: "Penedo, Frank J; Oswald, Laura B; Kronenfeld, Joshua P; Garcia, Sofia F; Cella, David; Yanez, Betina", year: 2020, type: "Article" },
+    { title: "Electronic health records and e-prescribing in Australia: An exploration of technological utilisation in Australian community pharmacies", authors: "Hareem, Amina; Stupans, Ieva; Park, Joon Soo; Stevens, Julie E.; Wang, Kate", year: 2024, type: "Article" },
+    { title: "LA SANTÉ CONNECTÉE", authors: "GLOANNEC & al.", year: 2017, type: "Monographie" },
+    { title: "Optimisation d'une interface numérique de santé à distance pour une meilleure expérience-patient", authors: "Lourdais, Chloé", year: 2022, type: "Thèse" },
+    { title: "E-santé et milieu carcéral", authors: "Py, Ulysse", year: 2024, type: "Thèse" },
+    { title: "La e-santé : de nouveaux usages pour les technologies individuelles en santé publique", authors: "Salmon, Fréderic Durand; Le Tallec, Loïc", year: 2014, type: "Article" },
+    { title: "Appropriation de la plateforme de télépathologie I-PATH-INCTR dans la prise en charge des cancers pédiatriques au Mali et en RDC", authors: "Sossou, Komlanvi Etienne", year: 2023, type: "Thèse" },
+    { title: "La médecine sans médecin ? Le numérique au service du malade", authors: "Vallancien, Guy", year: 2015, type: "Ouvrage" },
+    { title: "e-Médecine, e-santé et informatique - entre espoirs technologiques et désillusion humaniste", authors: "Béorchia, Sylvain", year: 2017, type: "Article" },
+    { title: "L'e-santé : l'empowerment du patient connecté", authors: "Cases, Anne‑Sophie", year: 2017, type: "Article" },
+    { title: "Les nouvelles technologies : l'avenir de notre santé ?", authors: "Chambaud, Laurent", year: 2023, type: "Chapitre" },
+    { title: "Pratique de la e-santé en néphrologie en France : Résultats de la première enquête sur la télénéphrologie", authors: "Citarda, Salvatore; Camarroque, Anne‑Laure; Seret, Guillaume, et al.", year: 2019, type: "Article" },
+    { title: "Objets connectés et santé", authors: "Debet, Anne", year: 2017, type: "Article" }
+  ];
 
-    // Minimalist color palette for spines
-    const spineColors = ['bg-green-700', 'bg-emerald-700', 'bg-teal-700', 'bg-cyan-700', 'bg-sky-700'];
-    const colorIndex = title.length % spineColors.length;
-    const spineColor = spineColors[colorIndex];
+  const videotheque = [
+    { title: "La télémédecine en pratique - Reportage France 3", duration: "12:30" },
+    { title: "Débat : Télémédecine, progrès ou régression ?", duration: "45:00" },
+    { title: "Conférence HAS - État des lieux 2023", duration: "1:20:00" }
+  ];
 
-    return (
-      <a
-        href={link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="group relative w-32 h-44 bg-white shadow-sm hover:shadow-md transition-all hover:-translate-y-1 duration-300 cursor-pointer border border-gray-200 rounded-r-sm"
-      >
-        {/* Minimalist Spine */}
-        <div className={`absolute left-0 top-0 bottom-0 w-1.5 ${spineColor} rounded-l-sm`}></div>
+  const archives = [
+    { expert: "Mira Ballout", date: "15 octobre 2024", topics: ["Pratique de la télémédecine","Accessibilité","Défis techniques"] },
+    { expert: "Anne‑Sophie Cases", date: "8 novembre 2024", topics: ["E-santé","Empowerment patient","Innovation numérique"] },
+    { expert: "Dr Gregoire Mercier", date: "12 novembre 2024", topics: ["Économie de la santé","Télémédecine","Modèles de financement"] }
+  ];
 
-        {/* Content */}
-        <div className="pl-4 pr-3 py-4 h-full flex flex-col">
-          <div className="flex-1 overflow-hidden">
-            <h4 className="text-gray-900 text-[11px] font-bold leading-tight mb-2 line-clamp-4">
-              {title}
-            </h4>
-            <p className="text-gray-500 text-[10px] italic line-clamp-2">{author}</p>
-          </div>
-          <div className="mt-2 pt-2 border-t border-gray-100 flex justify-between items-end">
-            <span className="text-gray-400 text-[9px]">{year}</span>
-            <span className="text-[8px] px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded uppercase tracking-wider">{type.slice(0, 3)}</span>
-          </div>
-        </div>
-      </a>
-    );
-  };
+  const webographie = [
+    { name: "Site officiel de l'Assurance Maladie - Téléconsultation", url: "https://ameli.fr/telemedicine", desc: "Informations officielles sur la téléconsultation et son remboursement" },
+    { name: "Ordre National des Médecins - Télémédecine", url: "https://conseil-national.medecin.fr", desc: "Cadre déontologique et bonnes pratiques" },
+    { name: "CNIL - Protection des données de santé", url: "https://cnil.fr/sante", desc: "Recommandations sur la protection des données" },
+    { name: "Agence du Numérique en Santé (ANS)", url: "https://esante.gouv.fr", desc: "Stratégie nationale et référentiels techniques" },
+    { name: "Fédération Hospitalière de France", url: "https://fhf.fr", desc: "Position des hôpitaux sur la télémédecine" }
+  ];
 
-  const VideoTape = ({ title, duration, description }: { title: string, duration: string, description: string }) => (
-    <div className="group relative w-48 h-28 bg-gray-900 rounded shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer overflow-hidden">
-      {/* Tape Window Effect */}
-      <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-32 h-12 bg-gray-800 rounded-sm flex items-center justify-center">
-        <div className="w-8 h-8 rounded-full border-2 border-gray-700 mx-2"></div>
-        <div className="w-8 h-8 rounded-full border-2 border-gray-700 mx-2"></div>
-      </div>
+  const gallery = [
+    { title: "Infographie : Évolution du nombre de téléconsultations" },
+    { title: "Carte des déserts médicaux en France" },
+    { title: "Schéma : Parcours type d'une téléconsultation" }
+  ];
 
-      {/* Label */}
-      <div className="absolute top-0 left-0 right-0 bg-white/95 p-3 h-14 border-b border-gray-800">
-        <h4 className="text-gray-900 text-[10px] font-bold leading-tight line-clamp-2">{title}</h4>
-      </div>
+  useEffect(() => {
+    // lock body scroll for full-screen presentation but allow internal scroll in content
+    document.body.style.overflow = 'hidden';
+    return () => { document.body.style.overflow = ''; };
+  }, []);
 
-      {/* Duration Badge */}
-      <div className="absolute bottom-2 right-2 bg-red-600 text-white text-[9px] px-1.5 py-0.5 rounded">
-        {duration}
-      </div>
-
-      {/* Play Overlay on Hover */}
-      <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-        <div className="w-8 h-8 bg-white rounded-full flex items-center justify-center">
-          <div className="w-0 h-0 border-t-[4px] border-t-transparent border-l-[8px] border-l-green-600 border-b-[4px] border-b-transparent ml-0.5"></div>
-        </div>
-      </div>
-    </div>
-  );
-
-  const Folder = ({ title, date, themes }: { title: string, date: string, themes: string[] }) => (
-    <div className="group relative w-40 h-52 bg-green-50 rounded-r-md rounded-bl-md shadow-sm hover:shadow-md hover:-translate-y-1 transition-all cursor-pointer border border-green-100">
-      {/* Tab */}
-      <div className="absolute -top-2 left-0 w-16 h-3 bg-green-50 rounded-t border-t border-l border-r border-green-100"></div>
-
-      {/* Content */}
-      <div className="p-4 h-full flex flex-col">
-        <div className="border-b border-green-200/50 pb-2 mb-2">
-          <h4 className="text-green-900 text-[11px] font-bold leading-tight">{title}</h4>
-          <p className="text-green-700/60 text-[10px] mt-1">{date}</p>
-        </div>
-        <div className="flex-1">
-          <div className="mt-2 flex flex-wrap gap-1">
-            {themes.map((theme, i) => (
-              <span key={i} className="text-[8px] px-1.5 py-0.5 bg-white text-green-700 border border-green-100 rounded shadow-sm">
-                {theme}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+  const goPrev = () => setActiveSection('experts');
+  const goNext = () => setActiveSection('chronologie');
 
   return (
-    <div className="pt-16 min-h-screen bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="flex items-center mb-6">
-          <BookOpen className="mr-3 text-green-700" size={32} />
-          <h1 className="text-gray-900 text-4xl font-bold">La Bibliothèque</h1>
+    <div className="fixed inset-0 h-screen w-screen flex flex-col bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
+      {/* header */}
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-3 p-6">
+        <button onClick={() => setActiveSection('home')} className="flex items-center gap-2">
+          <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="20" cy="20" r="18" fill="#10B981" opacity="0.1"/>
+            <path d="M20 28C20 28 10 22 10 15C10 12 12 10 14.5 10C16.5 10 18 11 20 13C22 11 23.5 10 25.5 10C28 10 30 12 30 15C30 22 20 28 20 28Z" fill="#10B981" opacity="0.8"/>
+            <path d="M8 20 L12 20 L14 16 L16 24 L18 20 L20 20 L22 20 L24 16 L26 24 L28 20 L32 20" stroke="#059669" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none">
+              <animate attributeName="d" dur="2s" repeatCount="indefinite" values="M8 20 L12 20 L14 16 L16 24 L18 20 L20 20 L22 20 L24 16 L26 24 L28 20 L32 20; M8 20 L12 20 L14 20 L16 20 L18 20 L20 16 L22 24 L24 20 L26 20 L28 20 L32 20; M8 20 L12 20 L14 20 L16 20 L18 20 L20 20 L22 20 L24 20 L26 20 L28 16 L30 24 L32 20; M8 20 L12 20 L14 16 L16 24 L18 20 L20 20 L22 20 L24 16 L26 24 L28 20 L32 20"/>
+            </path>
+            <circle cx="30" cy="12" r="6" fill="white"/>
+            <path d="M30 9 L30 15 M27 12 L33 12" stroke="#10B981" strokeWidth="2" strokeLinecap="round"/>
+          </svg>
+          <span className="text-gray-900 font-bold">La Bibliothèque</span>
+        </button>
+      </motion.div>
+
+      {/* content */}
+      <div className="flex-1 overflow-y-auto p-8">
+        <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Left: Bibliographie */}
+          <section>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">Bibliographie</h2>
+            <p className="text-gray-600 mb-6">Une collection organisée de savoirs, d'analyses et de témoignages pour approfondir la controverse.</p>
+            <div className="space-y-4">
+              {bibliographie.map((b, i) => (
+                <div key={i} className="p-4 bg-white/80 backdrop-blur-sm border border-green-100 rounded-lg">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <h3 className="font-semibold text-gray-900">{b.title}</h3>
+                      <p className="text-sm text-gray-600">{b.authors} — {b.year} · <span className="text-xs text-green-600 font-medium">{b.type}</span></p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Right: Vidéothèque / Archives / Webo / Galerie */}
+          <section className="space-y-6">
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Vidéothèque</h3>
+              <div className="space-y-3">
+                {videotheque.map((v, i) => (
+                  <div key={i} className="p-3 bg-white/85 border border-green-100 rounded-lg flex justify-between items-center">
+                    <div>
+                      <div className="font-medium text-gray-800">{v.title}</div>
+                      <div className="text-xs text-gray-500">Durée : {v.duration}</div>
+                    </div>
+                    <div className="text-sm text-green-600">Play</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Archives des Entretiens</h3>
+              <div className="space-y-3">
+                {archives.map((a, i) => (
+                  <div key={i} className="p-3 bg-white/85 border border-green-100 rounded-lg">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <div className="font-semibold text-gray-800">{a.expert}</div>
+                        <div className="text-xs text-gray-500">{a.date}</div>
+                      </div>
+                    </div>
+                    <div className="mt-2 text-sm text-gray-700">
+                      {a.topics.join(' · ')}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Webographie</h3>
+              <ul className="space-y-2">
+                {webographie.map((w, i) => (
+                  <li key={i} className="p-3 bg-white/85 border border-green-100 rounded-lg">
+                    <a href={w.url} target="_blank" rel="noreferrer" className="font-medium text-green-700">{w.name}</a>
+                    <div className="text-xs text-gray-500">{w.desc}</div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 mb-3">Galerie d'Illustrations</h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                {gallery.map((g, i) => (
+                  <div key={i} className="p-4 bg-white/85 border border-green-100 rounded-lg text-gray-800">{g.title}</div>
+                ))}
+              </div>
+            </div>
+          </section>
         </div>
 
-        <p className="text-gray-600 mb-16 max-w-3xl text-lg">
-          Une collection organisée de savoirs, d'analyses et de témoignages pour approfondir la controverse.
-        </p>
+        <div className="max-w-7xl mx-auto mt-10">
+          <h4 className="text-sm text-gray-500">Sources changent avec</h4>
+        </div>
+      </div>
 
-        {/* Bibliographie Section */}
-        <Shelf title="Bibliographie" icon={FileText}>
-          {documentation.bibliographieAnglais.map((item, index) => (
-            <Book
-              key={`en-${index}`}
-              title={item.titre}
-              author={item.auteur}
-              year={item.annee}
-              type={item.type}
-              doi={item.doi}
-            />
-          ))}
-          {documentation.bibliographieFrancais.map((item, index) => (
-            <Book
-              key={`fr-${index}`}
-              title={item.titre}
-              author={item.auteur}
-              year={item.annee}
-              type={item.type}
-              doi={item.doi}
-              url={item.url}
-            />
-          ))}
-        </Shelf>
-
-        {/* Vidéos Section */}
-        <Shelf title="Vidéothèque" icon={Video}>
-          {documentation.videos.map((item, index) => (
-            <VideoTape
-              key={index}
-              title={item.titre}
-              duration={item.duree}
-              description={item.description}
-            />
-          ))}
-        </Shelf>
-
-        {/* Entretiens Section */}
-        <Shelf title="Archives des Entretiens" icon={Mic}>
-          {documentation.entretiens.map((item, index) => (
-            <Folder
-              key={index}
-              title={item.titre}
-              date={item.date}
-              themes={item.themes}
-            />
-          ))}
-        </Shelf>
-
-        {/* Webographie (Classic List for now, or maybe a "Rolodex" style later? Keeping simple for now) */}
-        <section className="mb-16 mt-24">
-          <div className="flex items-center mb-6">
-            <LinkIcon className="mr-2 text-green-700" size={24} />
-            <h2 className="text-gray-900 text-2xl font-bold">Webographie</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {documentation.webographie.map((item, index) => (
-              <a
-                href={item.url.startsWith('http') ? item.url : `https://${item.url}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                key={index}
-                className="block p-4 border border-gray-200 bg-white rounded hover:border-green-400 hover:shadow-md transition-all group"
-              >
-                <h3 className="text-gray-900 font-bold mb-1 group-hover:text-green-700">{item.titre}</h3>
-                <p className="text-sm text-green-600 mb-1 flex items-center">
-                  <ExternalLink size={12} className="mr-1" />
-                  {item.url}
-                </p>
-                <p className="text-sm text-gray-600">{item.description}</p>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        {/* Illustrations Section */}
-        <section className="mb-16">
-          <div className="flex items-center mb-6">
-            <ImageIcon className="mr-2 text-green-700" size={24} />
-            <h2 className="text-gray-900 text-2xl font-bold">Galerie d'Illustrations</h2>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {documentation.illustrations.map((item, index) => (
-              <div key={index} className="p-4 bg-white border border-gray-200 shadow-sm hover:shadow-md transition-all duration-300 pb-6 rounded">
-                <div className="w-full h-40 bg-gray-50 mb-3 flex items-center justify-center overflow-hidden rounded-sm">
-                  <ImageIcon className="text-gray-300" size={48} />
-                </div>
-                <h3 className="text-gray-900 font-medium text-center text-sm">{item.titre}</h3>
-              </div>
-            ))}
-          </div>
-        </section>
-
+      {/* footer nav (arrows) */}
+      <div className="p-6 flex items-center justify-center gap-6">
+        <motion.button onClick={goPrev} whileHover={{ scale: 1.03 }} className="p-3 bg-white/90 rounded-full border-2 border-green-600 shadow">
+          <ArrowLeft size={20} className="text-green-600" />
+        </motion.button>
+        <span className="text-sm text-gray-600">Documentation</span>
+        <motion.button onClick={goNext} whileHover={{ scale: 1.03 }} className="p-3 bg-white/90 rounded-full border-2 border-green-600 shadow">
+          <ArrowRight size={20} className="text-green-600" />
+        </motion.button>
       </div>
     </div>
   );
