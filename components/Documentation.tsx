@@ -1,13 +1,14 @@
-import React, { useState, useEffect } from 'react';
-import { BookOpen, FileText, Video, Link as LinkIcon, Image as ImageIcon, Mic, ExternalLink, ArrowRight, ArrowLeft, Brain, Network, Heart } from 'lucide-react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { FooterNav } from './FooterNav';
 
 interface DocumentationProps {
   setActiveSection: (section: string) => void;
 }
 
 export function Documentation({ setActiveSection }: DocumentationProps) {
-  const [currentSlide] = useState(0); // page is single presentation view
+  const [currentSlide] = useState(0);
 
   const bibliographie = [
     { title: "Impact of E-Health Literacy on Diabetes Self-Care Activities Among People With Type 2 Diabetes Attending Primary Healthcare Centers in Makkah City, Saudi Arabia: A Cross-Sectional Study", authors: "AlShehri, Waleed S.; Khojah, Yasser Y.", year: 2025, type: "Article" },
@@ -19,6 +20,8 @@ export function Documentation({ setActiveSection }: DocumentationProps) {
     { title: "Strategies for sustainable adoption of e-health tools for digital mental health services", authors: "Musakuro, Rhodrick N.; Gie, Liiza", year: 2025, type: "Article" },
     { title: "The Increasing Value of eHealth in the Delivery of Patient-Centred Cancer Care", authors: "Penedo, Frank J; Oswald, Laura B; Kronenfeld, Joshua P; Garcia, Sofia F; Cella, David; Yanez, Betina", year: 2020, type: "Article" },
     { title: "Electronic health records and e-prescribing in Australia: An exploration of technological utilisation in Australian community pharmacies", authors: "Hareem, Amina; Stupans, Ieva; Park, Joon Soo; Stevens, Julie E.; Wang, Kate", year: 2024, type: "Article" },
+    // AMUE article ajouté en mode présentation
+    { title: "AMUE — Accompagnement des transformations numériques dans l'enseignement et la santé", authors: "AMUE", year: 2021, type: "Rapport / Article institutionnel" },
     { title: "LA SANTÉ CONNECTÉE", authors: "GLOANNEC & al.", year: 2017, type: "Monographie" },
     { title: "Optimisation d'une interface numérique de santé à distance pour une meilleure expérience-patient", authors: "Lourdais, Chloé", year: 2022, type: "Thèse" },
     { title: "E-santé et milieu carcéral", authors: "Py, Ulysse", year: 2024, type: "Thèse" },
@@ -59,7 +62,6 @@ export function Documentation({ setActiveSection }: DocumentationProps) {
   ];
 
   useEffect(() => {
-    // lock body scroll for full-screen presentation but allow internal scroll in content
     document.body.style.overflow = 'hidden';
     return () => { document.body.style.overflow = ''; };
   }, []);
@@ -69,7 +71,6 @@ export function Documentation({ setActiveSection }: DocumentationProps) {
 
   return (
     <div className="fixed inset-0 h-screen w-screen flex flex-col bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50">
-      {/* header */}
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="flex items-center gap-3 p-6">
         <button onClick={() => setActiveSection('home')} className="flex items-center gap-2">
           <svg width="32" height="32" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -85,10 +86,8 @@ export function Documentation({ setActiveSection }: DocumentationProps) {
         </button>
       </motion.div>
 
-      {/* content */}
       <div className="flex-1 overflow-y-auto p-8">
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {/* Left: Bibliographie */}
           <section>
             <h2 className="text-2xl font-bold text-gray-900 mb-4">Bibliographie</h2>
             <p className="text-gray-600 mb-6">Une collection organisée de savoirs, d'analyses et de témoignages pour approfondir la controverse.</p>
@@ -106,7 +105,6 @@ export function Documentation({ setActiveSection }: DocumentationProps) {
             </div>
           </section>
 
-          {/* Right: Vidéothèque / Archives / Webo / Galerie */}
           <section className="space-y-6">
             <div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Vidéothèque</h3>
@@ -170,7 +168,6 @@ export function Documentation({ setActiveSection }: DocumentationProps) {
         </div>
       </div>
 
-      {/* footer nav (arrows) */}
       <div className="p-6 flex items-center justify-center gap-6">
         <motion.button onClick={goPrev} whileHover={{ scale: 1.03 }} className="p-3 bg-white/90 rounded-full border-2 border-green-600 shadow">
           <ArrowLeft size={20} className="text-green-600" />
@@ -180,6 +177,8 @@ export function Documentation({ setActiveSection }: DocumentationProps) {
           <ArrowRight size={20} className="text-green-600" />
         </motion.button>
       </div>
+
+      <FooterNav setActiveSection={setActiveSection} currentSection="documentation" />
     </div>
   );
 }

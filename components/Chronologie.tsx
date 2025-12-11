@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, ArrowLeft, Brain, Network, Heart } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { FooterNav } from './FooterNav';
 
 interface ChronologieProps {
   setActiveSection: (section: string) => void;
@@ -14,35 +15,35 @@ export function Chronologie({ setActiveSection }: ChronologieProps) {
       id: 0,
       year: '1960s',
       title: 'Débuts de la Télémédecine',
-      description: 'Première expérience historique de transmission d\'images médicales par satellite entre l\'Université du Nebraska et Omaha. Naissance du concept de consultation à distance.',
+      description: "Première expérience historique de transmission d'images médicales par satellite entre l'Université du Nebraska et Omaha. Naissance du concept de consultation à distance.",
       emoji: '📡'
     },
     {
       id: 1,
       year: '1990s',
       title: 'Internet et Expansion Globale',
-      description: 'Développement des premiers systèmes de téléconsultation utilisant Internet. Légalisation progressive en plusieurs pays. Premiers cadres réglementaires établis.',
+      description: "Développement des premiers systèmes de téléconsultation utilisant Internet. Légalisation progressive en plusieurs pays. Premiers cadres réglementaires établis.",
       emoji: '💻'
     },
     {
       id: 2,
       year: '2000s',
       title: 'Révolution Mobile et IA',
-      description: 'Émergence des applications mobiles de santé et des systèmes de diagnostic assistés par IA. Augmentation significative de l\'accès à la télémédecine dans les zones rurales et reculées.',
+      description: "Émergence des applications mobiles de santé et des systèmes de diagnostic assistés par IA. Augmentation significative de l'accès à la télémédecine dans les zones rurales et reculées.",
       emoji: '📱'
     },
     {
       id: 3,
       year: '2020-2021',
       title: 'Pandémie COVID-19 - Accélération',
-      description: 'Accélération majeure et inévitable de l\'adoption de la télémédecine. Devient un élément crucial et non optionnel du système de santé. Régulation d\'urgence mise en place.',
+      description: "Accélération majeure et inévitable de l'adoption de la télémédecine. Devient un élément crucial et non optionnel du système de santé. Régulation d'urgence mise en place.",
       emoji: '🚑'
     },
     {
       id: 4,
       year: '2024',
       title: 'Ère Numérique Complète & Controverse',
-      description: 'Intégration complète de l\'IA, blockchain et big data dans l\'e-santé. La télémédecine est incontournable mais controversée. Enjeux éthiques, réglementaires et humains au cœur des débats.',
+      description: "Intégration complète de l'IA, blockchain et big data dans l'e-santé. La télémédecine est incontournable mais controversée. Enjeux éthiques, réglementaires et humains au cœur des débats.",
       emoji: '🤖'
     }
   ];
@@ -75,14 +76,14 @@ export function Chronologie({ setActiveSection }: ChronologieProps) {
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     document.documentElement.style.overflow = 'hidden';
-    
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowRight' || e.key === 'Enter') handleNextSlide();
+      if (e.key === 'ArrowRight' || e.key === 'Enter' || e.key === ' ') handleNextSlide();
       if (e.key === 'ArrowLeft' || e.key === 'Backspace') handlePrevSlide();
     };
 
     window.addEventListener('keydown', handleKeyDown);
-    
+
     return () => {
       document.body.style.overflow = 'unset';
       document.documentElement.style.overflow = 'unset';
@@ -91,10 +92,9 @@ export function Chronologie({ setActiveSection }: ChronologieProps) {
   }, [currentSlide]);
 
   return (
-    <div 
+    <div
       className="fixed inset-0 h-screen w-screen flex items-center justify-center bg-gradient-to-br from-green-50 via-emerald-50 to-teal-50 overflow-hidden"
     >
-      {/* Header avec logo cliquable */}
       <motion.button
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -114,7 +114,6 @@ export function Chronologie({ setActiveSection }: ChronologieProps) {
         <span className="text-sm font-bold text-gray-900">ControCare</span>
       </motion.button>
 
-      {/* Animated background */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div animate={{ y: [0, -20, 0], x: [0, 10, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} className="absolute top-20 left-10 w-32 h-32 bg-green-200 rounded-full blur-3xl opacity-40" />
         <motion.div animate={{ y: [0, 20, 0], x: [0, -15, 0] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} className="absolute bottom-20 right-10 w-40 h-40 bg-emerald-300 rounded-full blur-3xl opacity-30" />
@@ -124,11 +123,8 @@ export function Chronologie({ setActiveSection }: ChronologieProps) {
         <motion.div animate={{ y: [0, -10, 0], x: [0, 10, 0] }} transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }} className="absolute top-1/3 right-16"><Brain size={35} className="text-teal-300 opacity-20" /></motion.div>
       </div>
 
-      {/* Slide Container */}
       <div className="w-full h-full relative flex items-center justify-center">
         <AnimatePresence mode="wait">
-          
-          {/* SLIDE 0: INTRO */}
           {currentSlide === 0 && (
             <motion.div
               key="slide-0"
@@ -142,23 +138,23 @@ export function Chronologie({ setActiveSection }: ChronologieProps) {
                 <motion.div initial={{ scale: 0, rotate: -180 }} animate={{ scale: 1, rotate: 0 }} transition={{ duration: 0.8, type: "spring" }} className="inline-flex items-center justify-center w-28 h-28 mb-8">
                   <div className="text-6xl">📈</div>
                 </motion.div>
-                
+
                 <motion.h1 initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="text-gray-900 mb-6 text-4xl md:text-5xl lg:text-6xl font-bold">
                   Chronologie<br />
                   <span className="bg-gradient-to-r from-green-600 via-emerald-600 to-teal-600 bg-clip-text text-transparent">
                     De la Télémédecine
                   </span>
                 </motion.h1>
-                
+
                 <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }} className="text-gray-600 text-lg mb-12 leading-relaxed">
                   Découvrez l'évolution historique de la télémédecine à travers 60 ans de développement
                 </motion.p>
+                <p className="text-sm text-gray-500">Utilisez ← → ou Cliquez / ENTRÉE pour naviguer</p>
               </div>
             </motion.div>
           )}
 
-          {/* SLIDES 1-5: EVENTS */}
-          {currentSlide >= 1 && currentSlide <= 5 && (
+          {currentSlide >= 1 && currentSlide <= events.length && (
             <motion.div
               key={`slide-${currentSlide}`}
               initial={{ opacity: 0, x: 100 }}
@@ -169,7 +165,6 @@ export function Chronologie({ setActiveSection }: ChronologieProps) {
             >
               <div className="max-w-2xl w-full">
                 <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} className="bg-white/80 backdrop-blur-sm border-2 border-emerald-600 rounded-3xl shadow-2xl p-8 md:p-12">
-                  
                   <div className="text-center mb-8">
                     <div className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-full mb-6">
                       <span className="text-4xl">{events[currentSlide - 1].emoji}</span>
@@ -195,11 +190,9 @@ export function Chronologie({ setActiveSection }: ChronologieProps) {
               </div>
             </motion.div>
           )}
-
         </AnimatePresence>
       </div>
 
-      {/* Slide indicator */}
       <div className="fixed bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-2">
         {slides.map((_, idx) => (
           <motion.div
@@ -209,30 +202,15 @@ export function Chronologie({ setActiveSection }: ChronologieProps) {
         ))}
       </div>
 
-      {/* Navigation arrows */}
-      <motion.button
-        initial={{ opacity: 0, x: -20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        onClick={handlePrevSlide}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        className="fixed left-8 top-1/2 transform -translate-y-1/2 z-20 p-4 bg-white/90 backdrop-blur-sm hover:bg-white rounded-full shadow-lg transition-all border-2 border-green-600 cursor-pointer"
-      >
+      <motion.button onClick={handlePrevSlide} whileHover={{ scale: 1.03 }} className="fixed left-8 top-1/2 transform -translate-y-1/2 z-20 p-4 bg-white/90 rounded-full shadow-lg border-2 border-green-600">
         <ArrowLeft size={28} className="text-green-600" />
       </motion.button>
-
-      <motion.button
-        initial={{ opacity: 0, x: 20 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.6, delay: 0.3 }}
-        onClick={handleNextSlide}
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.95 }}
-        className="fixed right-8 top-1/2 transform -translate-y-1/2 z-20 p-4 bg-white/90 backdrop-blur-sm hover:bg-white rounded-full shadow-lg transition-all border-2 border-green-600 cursor-pointer"
-      >
+      <motion.button onClick={handleNextSlide} whileHover={{ scale: 1.03 }} className="fixed right-8 top-1/2 transform -translate-y-1/2 z-20 p-4 bg-white/90 rounded-full shadow-lg border-2 border-green-600">
         <ArrowRight size={28} className="text-green-600" />
       </motion.button>
+
+      {/* navigation / disclaimer */}
+      <FooterNav setActiveSection={setActiveSection} currentSection="chronologie" />
     </div>
   );
 }

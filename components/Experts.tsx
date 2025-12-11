@@ -1,6 +1,7 @@
 import { motion, AnimatePresence } from 'motion/react';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { FooterNav } from './FooterNav';
 
 interface ExpertsProps {
   setActiveSection: (section: string) => void;
@@ -181,6 +182,8 @@ export function Experts({ setActiveSection }: ExpertsProps) {
       <motion.button onClick={handleNextSlide} className="fixed right-8 top-1/2 transform -translate-y-1/2 z-20 p-4 bg-white/90 rounded-full shadow-lg border-2 border-green-600">
         <ArrowRight size={24} className="text-green-600" />
       </motion.button>
+
+      <FooterNav setActiveSection={setActiveSection} currentSection="experts" />
     </div>
   );
 }
